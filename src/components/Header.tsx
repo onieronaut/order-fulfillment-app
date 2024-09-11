@@ -11,8 +11,8 @@ interface HeaderPropsType {
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		divider: {
-			marginTop: theme.spacing(6),
-			marginBottom: theme.spacing(6),
+			marginTop: theme.spacing(2),
+			marginBottom: theme.spacing(2),
 		},
 	})
 );

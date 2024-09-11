@@ -1,21 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import {
-	Button,
 	Container,
 	createTheme,
 	CssBaseline,
 	ThemeProvider,
 } from '@mui/material';
-import Orders from './pages/Orders';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import './App.css';
+import ViewOrders from './pages/ViewOrders';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ViewOrder from './pages/ViewOrder';
 
 const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
 	},
 });
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <ViewOrders />,
+	},
+	{
+		path: '/orders/:id',
+		element: <ViewOrder />,
+	},
+]);
 
 function App() {
 	return (
@@ -24,7 +34,7 @@ function App() {
 			<ThemeProvider theme={darkTheme}>
 				<Container maxWidth={false}>
 					<CssBaseline />
-					<Orders />
+					<RouterProvider router={router} />
 				</Container>
 			</ThemeProvider>
 		</HelmetProvider>

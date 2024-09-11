@@ -16,26 +16,13 @@ import {
 	useReactTable,
 } from '@tanstack/react-table';
 import { OrderType } from '../types/order';
+import { useNavigate } from 'react-router-dom';
+import { ORDERS } from '../data/orders';
 
-interface OrdersPropsType {}
+interface ViewOrdersPropsType {}
 
-const Orders = ({}: OrdersPropsType) => {
-	const data: OrderType[] = [
-		{
-			id: 1,
-			createdAt: 1234,
-			name: 'john',
-			items: [1, 2],
-			status: 'pending',
-		},
-		{
-			id: 2,
-			createdAt: 1234,
-			name: 'james',
-			items: [1, 2, 3],
-			status: 'pending',
-		},
-	];
+const ViewOrders = ({}: ViewOrdersPropsType) => {
+	const navigate = useNavigate();
 
 	const columnHelper = createColumnHelper<OrderType>();
 
@@ -43,7 +30,11 @@ const Orders = ({}: OrdersPropsType) => {
 		columnHelper.display({
 			id: 'actions',
 			cell: (props) => (
-				<Button size='small' variant='contained' color='primary'>
+				<Button
+					size='small'
+					variant='contained'
+					color='primary'
+					onClick={() => navigate(`/orders/${props.row.original.id}`)}>
 					Fulfill
 				</Button>
 			),
@@ -65,7 +56,7 @@ const Orders = ({}: OrdersPropsType) => {
 
 	const table = useReactTable({
 		columns,
-		data,
+		data: ORDERS,
 		getCoreRowModel: getCoreRowModel(),
 	});
 
@@ -114,4 +105,4 @@ const Orders = ({}: OrdersPropsType) => {
 	);
 };
 
-export default Orders;
+export default ViewOrders;
